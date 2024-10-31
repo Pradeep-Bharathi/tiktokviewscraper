@@ -110,14 +110,13 @@ async def fetch_latest_videos(username):
         context = await browser.new_context()
         page = await context.new_page()
 
-        # Navigate to the TikTok profile page
         profile_url = f"https://www.tiktok.com/@{username}"
         await page.goto(profile_url, timeout=120000)
-        await page.wait_for_timeout(10000)  # Wait for the user to solve the captcha
+        await page.wait_for_timeout(10000)  
 
         video_data = []
         video_urls_set = set()
-        target_videos = 30
+        target_videos = 100
 
         while len(video_data) < target_videos:
             await page.evaluate("window.scrollBy(0, document.body.scrollHeight)")
